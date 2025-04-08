@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="zh">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>表單事件範例</title>
+    </head>
+    <body>
+        <h2>表單送出範例</h2>
+
+        <form id="myForm">
+            <label for="product">產品名稱：</label>
+            <input type="text" id="product" />
+            <p>即時輸入：<span id="liveOutput"></span></p>
+
+            <button type="submit">提交</button>
+        </form>
+
+        <script>
+            const productInput = document.getElementById('product');
+            const liveOutput = document.getElementById('liveOutput');
+            const form = document.getElementById('myForm');
+
+            // 監聽 input 事件（即時顯示輸入值）
+            productInput.addEventListener('input', function () {
+                liveOutput.textContent = productInput.value;
+            });
+
+            // 監聽 keydown 事件（按 Enter 顯示提示）
+            productInput.addEventListener('keydown', function (event) {
+                if (event.key === 'Enter') {
+                    event.preventDefault();
+                    alert('你按下了 Enter！');
+                }
+            });
+
+            // 監聽 submit 事件（攔截提交並顯示輸入資料）
+            form.addEventListener('submit', function (event) {
+                event.preventDefault(); // 阻止表單提交
+                alert(`表單提交！\n產品名稱: ${productInput.value}`);
+            });
+        </script>
+    </body>
+</html>
