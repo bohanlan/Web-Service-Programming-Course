@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>addEventListener 範例</title>
+</head>
+<body>
+
+    <button id="myButton">點擊我</button>
+
+    <script>
+        const btn = document.getElementById("myButton");
+
+        // 設置第一個事件監聽器
+        btn.addEventListener("click", function() {
+            alert("Handler 1: This will not be replaced");
+        });
+
+        // 設置第二個事件監聽器，不會覆蓋前一個
+        btn.addEventListener("click", function() {
+            alert("Handler 2: This runs alongside the first one");
+        });
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>onclick 覆蓋範例</title>
+</head>
+<body>
+
+    <button id="myButton">點擊我</button>
+
+    <script>
+        const btn = document.getElementById("myButton");
+
+        // 設置第一個 onclick 事件
+        btn.onclick = function() {
+            alert("Handler 1: This will be replaced");
+        };
+
+        // 設置第二個 onclick 事件，覆蓋掉前一個
+        btn.onclick = function() {
+            alert("Handler 2: This replaces the previous one");
+        };
+    </script>
+
+</body>
+</html>
+

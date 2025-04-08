@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>addEventListener 支援多種事件</title>
+</head>
+<body>
+
+    <button id="btn">點擊我</button>
+    <input id="inputField" type="text" placeholder="輸入文字">
+
+    <script>
+        const btn = document.getElementById("btn");
+        const input = document.getElementById("inputField");
+
+        // 監聽 click 事件
+        btn.addEventListener("click", function() {
+            console.log("🖱️ 按鈕被點擊！");
+        });
+
+        // 監聽 mouseover 事件
+        btn.addEventListener("mouseover", function() {
+            console.log("🐭 滑鼠移入按鈕！");
+        });
+
+        // 監聽 keydown 事件
+        input.addEventListener("keydown", function(event) {
+            console.log(`⌨️ 按鍵 ${event.key} 被按下`);
+        });
+    </script>
+
+</body>
+</html>

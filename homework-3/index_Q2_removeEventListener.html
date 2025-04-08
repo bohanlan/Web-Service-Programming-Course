@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>初次點擊提醒</title>
+</head>
+<body>
+
+    <button id="myButton">點擊我</button>
+
+    <script>
+        const btn = document.getElementById("myButton");
+
+        function firstClickReminder() {
+            alert("🚀 初次點擊提醒：歡迎使用！");
+
+            // 移除監聽器，確保提醒只出現一次
+            btn.removeEventListener("click", firstClickReminder);
+        }
+
+        // 添加事件監聽器
+        btn.addEventListener("click", firstClickReminder);
+    </script>
+
+</body>
+</html>
+
