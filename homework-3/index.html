@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="zh">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>表單事件範例</title>
+    </head>
+    <body>
+        <h2>表單事件範例</h2>
+
+        <form id="myForm">
+            <label for="name">姓名：</label>
+            <input type="text" id="name" name="name" />
+            <p>即時輸入：<span id="liveOutput"></span></p>
+
+            <label for="gender">性別：</label>
+            <select id="gender">
+                <option value="">請選擇</option>
+                <option value="male">男性</option>
+                <option value="female">女性</option>
+            </select>
+            <p>選擇結果：<span id="genderOutput"></span></p>
+
+            <button type="submit">提交</button>
+        </form>
+
+        <script>
+            const nameInput = document.getElementById('name');
+            const liveOutput = document.getElementById('liveOutput');
+            const genderSelect = document.getElementById('gender');
+            const genderOutput = document.getElementById('genderOutput');
+            const form = document.getElementById('myForm');
+
+            // 1️⃣ 監聽 input 事件（即時顯示輸入值）
+            nameInput.addEventListener('input', function () {
+                liveOutput.textContent = nameInput.value;
+            });
+
+            // 2️⃣ 監聽 keydown 事件（按 Enter 顯示提示）
+            // https://developer.mozilla.org/en-US/docs/Web/API/Element/keydown_event
+            nameInput.addEventListener('keydown', function (event) {
+                if (event.key === 'Enter') {
+                    event.preventDefault(); // 阻止表單提交
+                    alert('您按下了 Enter 鍵');
+                }
+            });
+
+            // 3️⃣ 監聽 change 事件（選擇變更）
+            // https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/change_event
+            genderSelect.addEventListener('change', function () {
+                genderOutput.textContent = genderSelect.options[genderSelect.selectedIndex].text;
+            });
+
+            // 4️⃣ 監聽 submit 事件（攔截提交並顯示輸入資料）
+            form.addEventListener('submit', function (event) {
+                alert(`表單提交！\n姓名: ${nameInput.value}\n性別: ${genderSelect.value}`);
+
+                // 清空姓名欄位和性別選擇和即時輸入和選擇結果
+                nameInput.value = '';
+                genderSelect.value = '';
+                liveOutput.textContent = '';
+                genderOutput.textContent = '';
+            });
+        </script>
+    </body>
+</html>
+<!-- 需求 -->
+<!-- 1. 當使用者在姓名欄位輸入時，實時顯示輸入的姓名。 -->
+<!-- 2. 當使用者按下 Enter 鍵時，Alert 該動作，有陷阱題。 -->
+<!-- 3. 當使用者選擇性別時，實時顯示選擇的性別。 -->
+<!-- 4. 當使用者提交表單時，攔截提交並顯示輸入的姓名和選擇的性別。 -->
+<!-- 5. 提交表單並 Alert 該動作後，清空姓名欄位和性別選擇。 -->
