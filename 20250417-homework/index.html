@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>511171263 Software Innovation Grade 3A Lan Bo-Han</title>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" />
+        <style>
+            body {
+                font-family: 'Times New Roman', Times, serif;
+                background-color: #f0f8ff;
+                transition: background-color 0.5s ease;
+            }
+            .container {
+                background-color: #fff;
+                padding: 30px;
+                margin-top: 50px;
+                border-radius: 12px;
+                box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+                animation: fadeIn 0.5s ease-out;
+            }
+            @keyframes fadeIn {
+                from {
+                    opacity: 0;
+                    transform: translateY(-20px);
+                }
+                to {
+                    opacity: 1;
+                    transform: translateY(0);
+                }
+            }
+            h1 {
+                color: #2e8b57;
+                text-align: center;
+                margin-bottom: 30px;
+                text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.05);
+            }
+            .input-group {
+                margin-bottom: 25px;
+            }
+            .form-control {
+                border-radius: 5px 0 0 5px;
+                border: 1px solid #8fbc8f;
+                transition: border-color 0.3s ease;
+            }
+            .form-control:focus {
+                border-color: #2e8b57;
+                box-shadow: 0 0 5px rgba(46, 139, 87, 0.3);
+            }
+            .btn-primary {
+                border-radius: 0 5px 5px 0;
+                background-color: #2e8b57;
+                border: none;
+                transition: background-color 0.3s ease, transform 0.2s ease-in-out;
+            }
+            .btn-primary:hover {
+                background-color: #228b22;
+                transform: scale(1.02);
+            }
+            .list-group-item {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                padding: 12px 15px;
+                margin-bottom: 8px;
+                border-radius: 5px;
+                background-color: #f5f5dc;
+                border: 1px solid #e0eee0;
+                box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+                transition: background-color 0.3s ease;
+            }
+            .list-group-item:hover {
+                background-color: #e6e6fa;
+            }
+            .completed {
+                text-decoration: line-through solid #778899;
+                color: #778899;
+                font-style: italic;
+                opacity: 0.7;
+            }
+            .delete-btn {
+                background-color: #b8860b;
+                color: white;
+                border: none;
+                border-radius: 5px;
+                padding: 6px 10px;
+                cursor: pointer;
+                transition: background-color 0.3s ease, transform 0.2s ease-in-out;
+            }
+            .delete-btn:hover {
+                background-color: #a0522d;
+                transform: scale(1.05);
+            }
+            .task-text {
+                flex-grow: 1;
+                cursor: pointer;
+                transition: color 0.3s ease;
+            }
+            .task-text.completed:hover {
+                background-color: transparent;
+                cursor: default;
+            }
+            .added-notification {
+                position: absolute;
+                top: 10px;
+                left: 50%;
+                transform: translateX(-50%);
+                background-color: #8fbc8f;
+                color: white;
+                padding: 8px 15px;
+                border-radius: 5px;
+                opacity: 0;
+                transition: opacity 0.5s ease-in-out, top 0.5s ease-in-out;
+            }
+            .added-notification.show {
+                top: 50px;
+                opacity: 1;
+            }
+        </style>
+    </head>
+
+    <body>
+        <div class="container">
+            <h1>To-Do List</h1>
+            <div class="input-group mb-3">
+                <input type="text" id="newTask" class="form-control" placeholder="" />
+                <div class="input-group-append">
+                    <button class="btn btn-primary" type="button" id="addTaskBtn">Add Task</button>
+                </div>
+            </div>
+            <ul class="list-group" id="taskList"></ul>
+            <div id="notification" class="added-notification">New Task Added！</div>
+        </div>
+
+        <script>
+            const taskInput = document.getElementById('newTask');
+            const addTaskBtn = document.getElementById('addTaskBtn');
+            const taskList = document.getElementById('taskList');
+            const notification = document.getElementById('notification');
+
+            function showNotification() {
+                notification.classList.add('show');
+                setTimeout(() => {
+                    notification.classList.remove('show');
+                }, 1500);
+            }
+
+            function addTask() {
+                const taskText = taskInput.value.trim();
+
+                if (taskText === '') {
+                    alert('Please enter a task.');
+                    return;
+                }
+
+                const listItem = document.createElement('li');
+                listItem.className = 'list-group-item';
+                listItem.innerHTML = `
+                <span class="task-text">${taskText}</span>
+                <button class="delete-btn">Remove Task</button>
+            `;
+
+                const taskSpan = listItem.querySelector('.task-text');
+                taskSpan.addEventListener('click', function () {
+                    this.classList.toggle('completed');
+                });
+
+                const deleteButton = listItem.querySelector('.delete-btn');
+                deleteButton.addEventListener('click', function () {
+                    listItem.remove();
+                });
+
+                taskList.appendChild(listItem);
+                taskInput.value = '';
+                showNotification();
+            }
+
+            addTaskBtn.addEventListener('click', addTask);
+
+            taskInput.addEventListener('keypress', function (event) {
+                if (event.key === 'Enter') {
+                    addTask();
+                }
+            });
+        </script>
+    </body>
+</html>
